@@ -4,7 +4,9 @@ import cors from 'cors';
 import "dotenv/config";
 import myUserRoute from "./routes/MyUserRoute";
 import myRestaurantRoute from "./routes/MyRestaurantRoute"
+import restaurantRoute from "./routes/RestaurantRoute"
 import { v2 as cloudinary } from "cloudinary";
+import Restaurant from './models/restaurant';
 
 mongoose
 .connect(process.env.MONGO_URI as string)
@@ -28,7 +30,7 @@ app.get("/health", async (req: Request, res: Response) => {
 
 app.use("/api/my/user", myUserRoute);
 app.use("/api/my/restaurant", myRestaurantRoute);
-
+app.use("/api/restaurant", restaurantRoute);
 
 app.listen(4000, ()=>{
           console.log('Server has started at 4000 🚀');
