@@ -1,11 +1,8 @@
 import express from "express";
 import multer from "multer";
-import { createMyRestaurant, getMyRestaurant, updateMyRestaurant } from "../controllers/MyRestaurantController";
+import { createMyRestaurant, getMyRestaurant, getMyRestaurantOrders, updateMyRestaurant, updateOrderStatus } from "../controllers/MyRestaurantController";
 import { jwtCheck, jwtParse } from "../middlewares/auth";
 import { validateMyRestaurantRequest } from "../middlewares/validation";
-// import MyRestaurantController from "../controllers/MyRestaurantController";
-
-// import { validateMyRestaurantRequest } from "../middleware/validation";
 
 const router = express.Router();
 
@@ -17,19 +14,19 @@ const upload = multer({
   },
 });
 
-// router.get(
-//   "/order",
-//   jwtCheck,
-//   jwtParse,
-//   MyRestaurantController.getMyRestaurantOrders
-// );
+router.get(
+  "/order",
+  jwtCheck,
+  jwtParse,
+  getMyRestaurantOrders
+);
 
-// router.patch(
-//   "/order/:orderId/status",
-//   jwtCheck,
-//   jwtParse,
-//   MyRestaurantController.updateOrderStatus
-// );
+router.patch(
+  "/order/:orderId/status",
+  jwtCheck,
+  jwtParse,
+  updateOrderStatus
+);
 
 router.get("/", jwtCheck, jwtParse, getMyRestaurant);
 
